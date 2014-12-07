@@ -1,0 +1,5 @@
+# Production configuration
+
+DEBUG = False
+ASSETS_AUTO_BUILD = False
+ADMINS = ('bugs@brpr.ru',)
