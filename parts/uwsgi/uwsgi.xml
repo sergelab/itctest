@@ -17,6 +17,7 @@
 <pythonpath>flask-alembic</pythonpath>
 <pythonpath>brpr.flask</pythonpath>
 <pythonpath>brpr.blueprints.language</pythonpath>
+<pythonpath>psycopg2</pythonpath>
 <pythonpath>simplejson</pythonpath>
 <pythonpath>sqlamp</pythonpath>
 <pythonpath>itctest</pythonpath>

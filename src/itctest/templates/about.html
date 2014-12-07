@@ -1,3 +1,7 @@
-<h1>About page</h1>
+{% extends 'common.html' %}
 
-Go to <a href="{{ url_for('index') }}">main page</a>
+{% block content %}
+	<h1>About page</h1>
+
+	Go to <a href="{{ url_for('index') }}">main page</a>
+{% endblock %}

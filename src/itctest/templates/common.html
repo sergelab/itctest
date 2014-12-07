@@ -1,6 +1,47 @@
 {% extends "base.html" %}
 
-{% block title %}Hello, World!{% endblock %}
+{% block title %}{{ _('Sitename') }}{% endblock %}
+
+{% block css %}
+    {% assets 'css_common_all' %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" />
+    {% endassets %}
+{% endblock %}
 
 {% block body %}
+	<div id="page">
+        <div id="header" class="section">
+            <div class="left">
+                <a href="/"><img alt="На главную" src="{{ url_for('static', filename='images/logo.png') }}" style="width:220px;" /></a>
+            </div>
+            <div class="center">
+                <h2>{{ _('Sitename') }}</h2>
+                <div class="description">
+                	{# TODO: Header text #}
+                </div>
+                {# TODO: Header menu #}
+            </div>
+            <div class="right">
+                <div class="phone">{{ _('Phone number') }}</div>
+                {% include 'languageswitcher.html' %}
+            </div>
+        </div>
+
+        {% block mainmenu %}{% include 'mainmenu.html' %}{% endblock %}
+        {% block breadcrumbs %}{% endblock %}
+        <div id="content" class="section">
+        	{% block content %}{% endblock %}
+        </div>
+    </div>
+    
+    <div id="footer">
+        <div class="content">
+            <br /><br />
+            <div class="section">
+                <div class="left">{{ _('Itctest copyrights') }}</div>
+                <div class="right"></div>
+            </div>
+            <br /><br />
+        </div>
+    </div>
 {% endblock %}

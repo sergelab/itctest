@@ -1,7 +1,22 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ g.language }}" xml:lang="{{ g.language }}">
     <head>
         <title>{% block title %}{% endblock %}</title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+ 		{% block meta %}{% endblock %}
+
+ 		{% block css %}{% endblock %}
+ 		{% block js %}{% endblock %}
+
+ 		<!--[if IE]>
+ 		{% block css_ie %}{% endblock %}
+ 		{% block js_ie %}{% endblock %}
+ 		<![endif]-->
+
+ 		{% block extrahead %}{% endblock %}
     </head>
 
     <body>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-07 17:54+0400\n"
+"POT-Creation-Date: 2014-12-07 19:23+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: src/itctest/config/base.cfg:25 src/itctest/config/development.cfg:13
+#: src/itctest/config/base.cfg:25 src/itctest/config/development.py:12
 msgid "English"
 msgstr ""
 
-#: src/itctest/config/base.cfg:26 src/itctest/config/development.cfg:14
+#: src/itctest/config/base.cfg:26 src/itctest/config/development.py:11
 msgid "Russian"
 msgstr ""
 
@@ -51,5 +51,33 @@ msgstr ""
 
 #: src/itctest/templates/501.html:6
 msgid "501 Error message"
+msgstr ""
+
+#: src/itctest/templates/common.html:3
+msgid "Interregional Testing Center"
+msgstr ""
+
+#: src/itctest/templates/common.html:18
+msgid "Sitename"
+msgstr ""
+
+#: src/itctest/templates/common.html:25
+msgid "Phone number"
+msgstr ""
+
+#: src/itctest/templates/common.html:41
+msgid "Itctest copyrights"
+msgstr ""
+
+#: src/itctest/templates/mainmenu.html:2
+msgid "Gaming equipment"
+msgstr ""
+
+#: src/itctest/templates/mainmenu.html:3
+msgid "Hardware and Software"
+msgstr ""
+
+#: src/itctest/templates/mainmenu.html:4
+msgid "About us"
 msgstr ""
 
