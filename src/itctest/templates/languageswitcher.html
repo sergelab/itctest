@@ -1,0 +1,13 @@
+<div class="lang">
+	{% for lkey, lname in config['LANGUAGES'].iteritems() %}
+		{% if lkey == g.language %}
+			<span title="{{ lname }}">
+				<img alt="{{ lkey }}" src="/static/images/flag_{{ lkey }}.jpg" />
+			</span>
+		{% else %}
+			<a title="{{ lname }}" href="{{ url_for('language.lang', language=lkey) }}">
+				<img alt="{{ lkey }}" src="/static/images/flag_{{ lkey }}.jpg" />
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
