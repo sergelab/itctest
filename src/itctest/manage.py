@@ -65,9 +65,5 @@ def syncdb(console=True):
     db.session.commit()
 
 
-@manager.command
-def test2(console=True):
-	pass
-
 def main():
     manager.run()
