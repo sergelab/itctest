@@ -1,1 +1,15 @@
 This is project itctest for Flask readme
+
+
+First steps:
+
+1. git pull
+2. ./bin/flask syncdb
+3. ./bin/flask migrate init
+4. ./bin/flask migrate upgrade head
+5. ./bin/flask assets build
+
+and finally:
+
+6. ./bin/flask runserver -p 8000
+
