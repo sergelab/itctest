@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+{% block htmlparams %}<html lang="{{ g.language }}">{% endblock %}
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-with, initial-scale=1" />
+
+        {% block meta %}{% endblock %}
+        {% block css %}{% endblock %}
+        {% block js %}{% endblock %}
+        {% block extrahead %}{% endblock %}
+    </head>
+
+    {% block bodyparams %}<body>{% endblock %}
+        {% block body %}{% endblock %}
+    </body>
+</html>

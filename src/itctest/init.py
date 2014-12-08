@@ -4,6 +4,7 @@ import importlib
 from flask import Flask, Blueprint
 from flask.ext.babel import Babel
 from flask.ext.assets import Environment
+from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.collect import Collect
 from flask.ext.mail import Mail
@@ -21,6 +22,7 @@ babel = Babel()
 assets = Environment()
 db = SQLAlchemy()
 collect = MyCollect()
+lm = LoginManager()
 mail = Mail()
 
 
@@ -29,8 +31,20 @@ def create_app():
     app.config.from_pyfile('config/base.cfg')
     app.config.from_envvar('FLASK_SETTINGS')
 
-    # TODO: Debug logging
+    if app.debug is not True:
+        import logging
+        from logging.handlers import RotatingFileHandler
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        error_handler = RotatingFileHandler(os.path.join(os.path.dirname(app.config.get('PROJECT_ROOT')), 'logs', 'error.log'), maxBytes=1024 * 1024 * 100, backupCount=20)
+        error_handler.setLevel(logging.ERROR)
+        error_handler.setFormatter(formatter)
+        debug_handler = RotatingFileHandler(os.path.join(os.path.dirname(app.config.get('PROJECT_ROOT')), 'logs', 'debug.log'), maxBytes=1024 * 1024 * 100, backupCount=20)
+        debug_handler.setLevel(logging.DEBUG)
+        debug_handler.setFormatter(formatter)
+        app.logger.addHandler(error_handler)
+        app.logger.addHandler(debug_handler)
 
+    lm.init_app(app)
     babel.init_app(app)
     assets.init_app(app)
     db.init_app(app)

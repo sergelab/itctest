@@ -1,8 +1,13 @@
 # coding: utf-8
 
-from flask import render_template
+from flask import (
+    Blueprint,
+    current_app,
+    render_template
+)
 from flask.ext.assets import Bundle
-from .init import app, assets
+from admin.models import User
+from .init import app, assets, lm, db
 
 
 assets.register('css_common_all', Bundle(
@@ -44,3 +49,12 @@ def error_500(error):
 @app.errorhandler(501)
 def not_implemented(error):
     return render_template('501.html', error=error), 501
+
+
+@lm.user_loader
+def load_user(user_id):
+    try:
+        user = User.query.filter(User.id == user_id, User.activity == True).first()
+        return user
+    except Exception as e:
+        current_app.logger.exception(e)

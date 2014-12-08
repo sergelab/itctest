@@ -1,0 +1,39 @@
+{% extends 'admin/common.html' %}
+
+{% block htmlparams %}<html lang="{{ g.language }}" class="uk-height-1-1 uk-notouch">{% endblock %}
+{% block bodyparams %}<body class="uk-height-1-1">{% endblock %}
+
+{% block body %}
+    <div class="uk-vertical-align uk-text-center uk-height-1-1">
+        <div class="uk-vertical-align-middle">
+            <p class="uk-h2">{{ _('Administrative area') }}</p>
+
+            {% if form.errors %}
+                <div id="content" class="container">
+                    <div class="uk-alert uk-alert-danger" role="alert">
+                        {% for f, err in form.errors.items() %}
+                            {% for e in err %}
+                                {{ e }}<br />
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <form method="post" action="{{ url_for('admin.login') }}" class="uk-panel uk-panel-box uk-form">
+                {{ form.hidden_tag() }}
+
+                <div class="uk-form-row">{{ form.login }}</div>
+                <div class="uk-form-row">{{ form.password }}</div>
+
+                <div class="uk-form-row">
+                    <button type="submit" class="uk-width-1-1 uk-button uk-button-primary uk-button-large">{{ _('Login button') }}</button>
+                </div>
+
+                <div class="uk-form-row uk-text-small">
+                    <label class="uk-float-left">{{ form.remember_me }} {{ form.remember_me.label.text }}</label>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -59,9 +59,28 @@ def drop_all():
 
 @manager.command
 def syncdb(console=True):
+    from admin.models import User
+
+    user_defaults = {
+        'login': 'admin',
+        'password': 'admin'
+    }
+    input_msg = 'Enter {0} [{1}]: '
+
+    if console:
+        for k, v in user_defaults.iteritems():
+            user_defaults[k] = raw_input(input_msg.format(k, v)) or v
+
+    user = User(**user_defaults)
+    user.activity = True
+
     drop_all()
 
     db.create_all()
+
+    db.session.add(user)
+    db.session.flush()
+
     db.session.commit()
 
 

@@ -1,0 +1,36 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ _('ITCTest administration panel title') }}{% endblock %}
+
+{% block css %}
+    {% assets 'css_admin_all' %}
+        <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet" media="all" />
+    {% endassets %}
+{% endblock %}
+
+{% block js %}
+    {% assets 'js_admin_all' %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
+{% block body %}
+    <nav class="uk-navbar uk-navbar-attached">
+        <div class="uk-container uk-container-center">
+            <a class="uk-navbar-brand uk-hidden-small" href="{{ url_for('admin.dashboard') }}">ITCTest</a>
+            <ul class="uk-navbar-nav uk-hidden-small">
+                <li><a href="#">{{ _('Articles menu') }}</a></li>
+                <li><a href="#">{{ _('News menu') }}</a></li>
+                <li><a href="#">{{ _('Navigation menu') }}</a></li>
+                <li><a href="#">{{ _('Users menu') }}</a></li>
+            </ul>
+            <div class="uk-navbar-brand uk-navbar-center uk-visible-small">
+                <a class="uk-navbar-brand" href="{{ url_for('admin.dashboard') }}">{{ _('ITCTest Administrative panel') }}</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content" class="container">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}
