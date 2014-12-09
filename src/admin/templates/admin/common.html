@@ -19,18 +19,37 @@
         <div class="uk-container uk-container-center">
             <a class="uk-navbar-brand uk-hidden-small" href="{{ url_for('admin.dashboard') }}">ITCTest</a>
             <ul class="uk-navbar-nav uk-hidden-small">
-                <li><a href="#">{{ _('Articles menu') }}</a></li>
+                <li><a href="{{ url_for('admin.articles') }}">{{ _('Articles menu') }}</a></li>
                 <li><a href="#">{{ _('News menu') }}</a></li>
                 <li><a href="#">{{ _('Navigation menu') }}</a></li>
                 <li><a href="#">{{ _('Users menu') }}</a></li>
             </ul>
             <div class="uk-navbar-brand uk-navbar-center uk-visible-small">
-                <a class="uk-navbar-brand" href="{{ url_for('admin.dashboard') }}">{{ _('ITCTest Administrative panel') }}</a>
+                <a class="uk-navbar-brand" href="{{ url_for('admin.dashboard') }}"><nobr>{{ _('ITCTest Administrative panel') }}</nobr></a>
             </div>
         </div>
     </nav>
 
-    <div id="content" class="container">
+    <div class="uk-container uk-container-center container">
         {% block content %}{% endblock %}
     </div>
 {% endblock %}
+
+{% macro render_field(field) %}
+    {% if field.type == 'BooleanField' %}
+        <span class="uk-form-label"></span>
+        <div class="uk-form-controls uk-form-controls-text">
+            {{ field }}
+            <label for="{{ field.id }}">{{ field.label.text }}</label>
+        </div>
+    {% else %}
+        <label class="uk-form-label" for="{{ field.id }}">{{ field.label.text }}{{ render_required(field.flags.required) }}</label>
+        <div class="uk-form-controls">
+            {{ field }} {{ '<div class="uk-badge uk-badge-danger">'|safe + field.errors[0] + '</div>'|safe if field.errors else '' }}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_required(required) %}
+    {{ '<strong style="color: #c91032;">&nbsp;*</strong>'|safe if required else '' }}
+{% endmacro %}

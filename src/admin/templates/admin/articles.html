@@ -1,0 +1,32 @@
+{% extends 'admin/common.html' %}
+
+{% block content %}
+    <h1 class="uk-h1">{{ _('Articles list page header') }}
+        {% if articles %}<a class="uk-button uk-button-primary uk-float-right" href="{{ url_for('admin.edit_article') }}">{{ _('Add article button') }}</a>{% endif %}
+    </h1>
+
+    {% if articles %}
+        <table class="uk-table uk-table-striped uk-table-hover">
+            <thead>
+                <th>{{ _('Article title header') }}</th>
+                <th>{{ _('Activity header') }}</th>
+            </thead>
+
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td><a href="{{ url_for('admin.edit_article', article_id=article.id) }}">{{ article.title }}</a></td>
+                        <td>{{ article.activity }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <article class="uk-article">
+            <p class="uk-article-lead">{{ _('No articles were added message') }}</p>
+            <p>
+                <a class="uk-button uk-button-primary" href="{{ url_for('admin.edit_article') }}">{{ _('Add article button') }}</a>
+            </p>
+        </article>
+    {% endif %}
+{% endblock %}

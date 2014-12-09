@@ -10,10 +10,17 @@ class Article(db.Model, Translatable):
     __tablename__ = 'articles'
 
     id = db.Column(db.Integer, primary_key=True)
-    slug = db.Column(db.String)
+    slug = db.Column(db.String, unique=True)
     title = TranslatableColumn(db.String, tsweight='A')
     text = TranslatableColumn(db.Text, tsweight='B')
     activity = db.Column(db.Boolean, default=True)
+
+    @classmethod
+    def admin_list(cls, filters=None):
+        query = cls.query
+        count = query.count()
+
+        return query, count
 
 
 class NewsArticle(db.Model, Translatable):
