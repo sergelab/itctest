@@ -117,6 +117,12 @@ class TranslatableMapperCreator(object):
                 q_trans_column.translatable_column = new_column
 
         columns.append(sa.Column(self.local_mapper.local_table.name + '_id', sa.ForeignKey(self.local_mapper.local_table.columns.id)))
+        columns.append(
+            sa.UniqueConstraint(
+                'language', self.local_mapper.local_table.name + '_id',
+                name='language_' + self.local_mapper.local_table.name + '_id_unique_constraint'
+            )
+        )
 
         table = self.__construct_table(
             self.local_mapper.local_table.name + '_translatable_fields',
