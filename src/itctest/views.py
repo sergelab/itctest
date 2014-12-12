@@ -3,11 +3,14 @@
 from flask import (
     Blueprint,
     current_app,
-    render_template
+    render_template,
+    abort,
+    g
 )
 from flask.ext.assets import Bundle
 from admin.models import User
 from .init import app, assets, lm, db
+from .models import Article, NewsArticle
 
 
 assets.register('css_common_all', Bundle(
@@ -17,14 +20,31 @@ assets.register('css_common_all', Bundle(
 	output='css/final/itctest.css'
 ))
 
+
+@app.before_request
+def before_request():
+    Article.language = g.language
+    NewsArticle.language = g.language
+
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    article = Article.query.filter(Article.slug == 'main_page').first()
+
+    if not article:
+        abort(404)
+
+    return render_template('index.html', article=article)
 
 
 @app.route('/about')
 def about():
-	return render_template('about.html')
+    article = Article.query.filter(Article.slug == 'about_page').first()
+    print('123')
+
+    #if not article:
+    #    abort(404)
+	return render_template('about.html', article=article)
 
 
 @app.route('/contacts')

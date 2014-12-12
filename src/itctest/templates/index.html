@@ -1,7 +1,7 @@
 {% extends 'common.html' %}
 
 {% block content %}
-    <h1>Hello, Main Page!</h1>
+    <h1>{{ article.title }}</h1>
 
-    <p>This is the test page</p>
+    <p>{{ article.text|safe }}</p>
 {% endblock %}
