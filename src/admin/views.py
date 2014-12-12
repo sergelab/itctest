@@ -106,7 +106,7 @@ def edit_article(article_id=None):
     else:
         article = Article()
 
-    form = ArticleForm(obj=article)
+    form = ArticleForm(obj=article, use_label=True)
 
     if form.validate_on_submit():
         try:

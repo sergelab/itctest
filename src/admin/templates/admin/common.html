@@ -19,10 +19,10 @@
         <div class="uk-container uk-container-center">
             <a class="uk-navbar-brand uk-hidden-small" href="{{ url_for('admin.dashboard') }}">ITCTest</a>
             <ul class="uk-navbar-nav uk-hidden-small">
-                <li><a href="{{ url_for('admin.articles') }}">{{ _('Articles menu') }}</a></li>
-                <li><a href="#">{{ _('News menu') }}</a></li>
-                <li><a href="#">{{ _('Navigation menu') }}</a></li>
-                <li><a href="#">{{ _('Users menu') }}</a></li>
+                <li><a href="{{ url_for('admin.articles') }}">{{ _('Articles_menu_option') }}</a></li>
+                <li><a href="#">{{ _('News_menu_option') }}</a></li>
+                <li><a href="#">{{ _('Navigation_menu_option') }}</a></li>
+                <li><a href="#">{{ _('Users_menu_option') }}</a></li>
             </ul>
             <div class="uk-navbar-brand uk-navbar-center uk-visible-small">
                 <a class="uk-navbar-brand" href="{{ url_for('admin.dashboard') }}"><nobr>{{ _('ITCTest Administrative panel') }}</nobr></a>
@@ -45,7 +45,7 @@
     {% else %}
         <label class="uk-form-label" for="{{ field.id }}">{{ field.label.text }}{{ render_required(field.flags.required) }}</label>
         <div class="uk-form-controls">
-            {{ field }} {{ '<div class="uk-badge uk-badge-danger">'|safe + field.errors[0] + '</div>'|safe if field.errors else '' }}
+            {{ field }} {{ field.errors }}{#{{ '<div class="uk-badge uk-badge-danger">'|safe + field.errors[0] + '</div>'|safe }} if field.errors else '' }}#}
         </div>
     {% endif %}
 {% endmacro %}

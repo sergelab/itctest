@@ -5,30 +5,40 @@ from wtforms.validators import (
     Optional
 )
 from flask import flash
-from flask.ext.babel import gettext as _
+from flask.ext.babel import gettext as _, lazy_gettext as __
 
-from itctest.forms import Form, wForm
-from itctest.widgets import WidgetPrebind
+from itctest.forms import (
+    Form,
+    wForm,
+    TranslatableForm,
+    TranslatableFieldsForm,
+    TranslatableFieldList
+)
+from itctest.widgets import (
+    WidgetPrebind,
+    TranslatableFormWidget,
+    TranslatableTabWidget
+)
 from itctest.models import Article
 
 from .models import db, User
 
 
-class ArticleForm(Form):
-    slug = wtf.TextField(_('Article slug label'), widget=WidgetPrebind(
+class ArticleTranslatableForm(TranslatableFieldsForm):
+    title = wtf.TextField(__('Article title label'), validators=[Required()], widget=WidgetPrebind(wtf.widgets.TextInput(), class_='uk-width-1-1'))
+    text = wtf.TextField(__('Article text label'), validators=[Required()], widget=WidgetPrebind(wtf.widgets.TextArea(), rows="15", cols="100", class_='uk-width-1-1'))
+
+
+class ArticleForm(TranslatableForm):
+    slug = wtf.TextField(__('Article slug label'), widget=WidgetPrebind(
         wtf.widgets.TextInput(),
         size=40,
     ), validators=[Required()])
-    title = wtf.TextField(_('Article title label'), widget=WidgetPrebind(
-        wtf.widgets.TextInput(),
-        class_='uk-width-1-1'
-    ))
-    text = wtf.TextField(_('Article text label'), widget=WidgetPrebind(
-        wtf.widgets.TextArea(),
-        rows=10,
-        cols=100,
-        class_='uk-width-1-1'
-    ))
+    translatable_fields = TranslatableFieldList(
+        wtf.FormField(ArticleTranslatableForm, widget=WidgetPrebind(
+            TranslatableFormWidget()
+        )), widget=WidgetPrebind(TranslatableTabWidget()), label=''
+    )
     activity = wtf.BooleanField(_('Article activity flag label'))
 
 
