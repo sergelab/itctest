@@ -10,9 +10,13 @@
         {{ form.hidden_tag() }}
 
         {% for field in form if field.widget.input_type != 'hidden' %}
-            <div class="uk-form-row">
-                {{ render_field(field) }}
-            </div>
+            {% if field.type == 'TranslatableFieldList' %}
+                {{ field }}
+            {% else %}
+                <div class="uk-form-row">
+                    {{ render_field(field) }}
+                </div>
+            {% endif %}
         {% endfor %}
 
         <div class="uk-form-row">
