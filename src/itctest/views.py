@@ -40,12 +40,11 @@ def index():
 @app.route('/about')
 def about():
     article = Article.query.filter(Article.slug == 'about_page').first()
-    print('123')
 
-    #if not article:
-    #    abort(404)
-	return render_template('about.html', article=article)
+    if not article:
+        abort(404)
 
+    return render_template('about.html', article=article)
 
 @app.route('/contacts')
 def contacts():
